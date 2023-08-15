@@ -18,6 +18,7 @@
 		AB1194522A8A396F00E54E79 /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194512A8A396F00E54E79 /* AddScreen.swift */; };
 		AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194532A8A3BB500E54E79 /* MessageScreen.swift */; };
 		AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */; };
+		AB11945A2A8B002F00E54E79 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194592A8B002F00E54E79 /* DetailScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		AB1194512A8A396F00E54E79 /* AddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreen.swift; sourceTree = "<group>"; };
 		AB1194532A8A3BB500E54E79 /* MessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreen.swift; sourceTree = "<group>"; };
 		AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageScreen.swift; sourceTree = "<group>"; };
+		AB1194592A8B002F00E54E79 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				AB1194532A8A3BB500E54E79 /* MessageScreen.swift */,
 				AB11944D2A8A391000E54E79 /* HomeScreen.swift */,
 				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
+				AB1194592A8B002F00E54E79 /* DetailScreen.swift */,
 				AB11943B2A8A0AD700E54E79 /* Main.storyboard */,
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
@@ -161,6 +164,7 @@
 				AB1194382A8A0AD700E54E79 /* SceneDelegate.swift in Sources */,
 				AB11944C2A8A361B00E54E79 /* Extension.swift in Sources */,
 				AB1194522A8A396F00E54E79 /* AddScreen.swift in Sources */,
+				AB11945A2A8B002F00E54E79 /* DetailScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
