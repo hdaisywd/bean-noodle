@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-var images = ["HomeIcon", "tmpPic"]
+var images = ["01", "02", "03"]
 
 class CustomCell: UICollectionViewCell {
     let imageView = UIImageView()
@@ -16,8 +16,8 @@ class CustomCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imageView)
-        imageView.backgroundColor = .red
-
+        imageView.contentMode = .scaleAspectFit
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -33,15 +33,8 @@ class CustomCell: UICollectionViewCell {
 
 class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCell
-        cell.imageView.image = UIImage(named: images[indexPath.row])
-        return cell
-    }
+    var myCollectionView: UICollectionView!
+    let pageControl = UIPageControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +74,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 2
+        stackView.spacing = 5
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
@@ -116,16 +109,31 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         topArea.addArrangedSubview(moreBtn)
         
         // 두번째 구역
-        var myCollectionView: UICollectionView!
         let layout = UICollectionViewFlowLayout()
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        myCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width), height: (UIScreen.main.bounds.width))
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        
         stackView.addArrangedSubview(myCollectionView)
+        
+        NSLayoutConstraint.activate([
+            myCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            myCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            myCollectionView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
+        myCollectionView.isPagingEnabled = true
         
         // 사진의 pagecontrol
-        let pageControl = UIPageControl()
         pageControl.hidesForSinglePage = true
         pageControl.numberOfPages = images.count
         pageControl.currentPage = 0
@@ -133,9 +141,38 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         pageControl.currentPageIndicatorTintColor = .black
         stackView.addArrangedSubview(pageControl)
         
+        // 세번째 구역
+        let nicknameLabel2 = UILabel()
+        nicknameLabel2.text = nickname
+        nicknameLabel2.font = UIFont.boldSystemFont(ofSize: 26.0)
+        stackView.addArrangedSubview(nicknameLabel2)
+        
+        // 다섯번째 구역
+        let textView = UITextView()
+        textView.text = "여행을 갔다왔다. 근데 여행을 또 가고 싶엇다. 헤헤. 음.. 나는 가고싶었던 곳이 과연어디인걸까? 생각을 한 번 해볼까? 아니.. 생각하기 싫다.. 응.. 생각하기 싫다.. 에휴... 벌써 새벽 3시다.. 세상에... "
+        stackView.addArrangedSubview(textView)
+        
         
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == myCollectionView {
+            let pageWidth = scrollView.frame.size.width
+            let currentPage = Int((scrollView.contentOffset.x + pageWidth / 2) / pageWidth)
+            pageControl.currentPage = currentPage
+        }
+    }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCell
+        cell.imageView.image = UIImage(named: images[indexPath.row])
+        return cell
+    }
+    
+
     
 }
