@@ -59,29 +59,46 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
+        let contentView : UIView! = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(contentView)
+        scrollView.backgroundColor = .yellow
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor)
+        ])
+        
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
         
         // Stack View
         let stackView = UIStackView()
-        scrollView.addSubview(stackView)
+        contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 5
+        stackView.backgroundColor = .red
         
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
         
         // 첫번째 구역
@@ -92,6 +109,11 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         topArea.distribution = .fillProportionally
         topArea.alignment = .fill
         topArea.spacing = 2
+        topArea.backgroundColor = .green
+        
+        NSLayoutConstraint.activate([
+            topArea.bottomAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50)
+        ])
         
         let tmpImg = UIImage(named: "tmpPic")
         let tmpPic = UIImageView(image: tmpImg)
@@ -113,8 +135,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        layout.scrollDirection = .vertical
+
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width), height: (UIScreen.main.bounds.width))
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -122,24 +143,35 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         
         stackView.addArrangedSubview(myCollectionView)
         
-        NSLayoutConstraint.activate([
-            myCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            myCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            myCollectionView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+//        NSLayoutConstraint.activate([
+//            myCollectionView.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 150)
+//        ])
 
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
         myCollectionView.isPagingEnabled = true
         
-        // 사진의 pagecontrol
+        // 사진의 pagecontrol 구역
+        let middleArea = UIStackView()
+        stackView.addArrangedSubview(middleArea)
+        middleArea.translatesAutoresizingMaskIntoConstraints = false
+        middleArea.axis = .horizontal
+        middleArea.distribution = .fillProportionally
+        middleArea.alignment = .fill
+        middleArea.spacing = 2
+        
+        NSLayoutConstraint.activate([
+            middleArea.bottomAnchor.constraint(equalTo: myCollectionView.bottomAnchor, constant: 20)
+        ])
+        
         pageControl.hidesForSinglePage = true
         pageControl.numberOfPages = images.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .black
-        stackView.addArrangedSubview(pageControl)
+        // pageControl.center = view.center
+        middleArea.addArrangedSubview(pageControl)
         
         // 세번째 구역
         let nicknameLabel2 = UILabel()
@@ -148,9 +180,15 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         stackView.addArrangedSubview(nicknameLabel2)
         
         // 다섯번째 구역
-        let textView = UITextView()
-        textView.text = "여행을 갔다왔다. 근데 여행을 또 가고 싶엇다. 헤헤. 음.. 나는 가고싶었던 곳이 과연어디인걸까? 생각을 한 번 해볼까? 아니.. 생각하기 싫다.. 응.. 생각하기 싫다.. 에휴... 벌써 새벽 3시다.. 세상에... "
+        let textView = UILabel()
+        textView.numberOfLines = 10
+        textView.text = "여행을 갔다왔다. 근데 여행을 또 가고 싶엇다. 헤헤. 음.. 나는 가고싶었던 곳이 과연어디인걸까? 생각을 한 번 해볼까? 아니.. 생각하기 싫다.. 응.. 생각하기 싫다.. 에휴... 벌써 새벽 3시다.. 세상에... 아 아닌가.. 일단은.. 뭐.. 좋네요.. 김광석 노래를 듣고 하모니카를 산 친구가 있댄다.. 아주 웃기다.. 그래서 꾸준히 연습은 했어? 내가 물었다. 아니? 친구가 대답했다. 사놓고 안했단다. "
         stackView.addArrangedSubview(textView)
+        textView.backgroundColor = .blue
+        
+        NSLayoutConstraint.activate([
+            textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
         
         
     }
