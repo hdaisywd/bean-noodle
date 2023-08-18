@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2635CAE72A8A75C9005DC68A /* MyPageStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2635CAE62A8A75C9005DC68A /* MyPageStoryBoard.storyboard */; };
 		AB1194362A8A0AD700E54E79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194352A8A0AD700E54E79 /* AppDelegate.swift */; };
 		AB1194382A8A0AD700E54E79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194372A8A0AD700E54E79 /* SceneDelegate.swift */; };
 		AB11943A2A8A0AD700E54E79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194392A8A0AD700E54E79 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2635CAE62A8A75C9005DC68A /* MyPageStoryBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPageStoryBoard.storyboard; sourceTree = "<group>"; };
 		AB1194322A8A0AD700E54E79 /* BeanNoddle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeanNoddle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1194352A8A0AD700E54E79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB1194372A8A0AD700E54E79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2633E0FC2A8E68A2003492C1 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
+				2635CAE62A8A75C9005DC68A /* MyPageStoryBoard.storyboard */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		AB1194292A8A0AD700E54E79 = {
 			isa = PBXGroup;
 			children = (
@@ -73,7 +84,7 @@
 				AB1194512A8A396F00E54E79 /* AddScreen.swift */,
 				AB1194532A8A3BB500E54E79 /* MessageScreen.swift */,
 				AB11944D2A8A391000E54E79 /* HomeScreen.swift */,
-				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
+				2633E0FC2A8E68A2003492C1 /* MyPage */,
 				AB11943B2A8A0AD700E54E79 /* Main.storyboard */,
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
@@ -142,6 +153,7 @@
 			files = (
 				AB1194422A8A0AD900E54E79 /* LaunchScreen.storyboard in Resources */,
 				AB11943F2A8A0AD900E54E79 /* Assets.xcassets in Resources */,
+				2635CAE72A8A75C9005DC68A /* MyPageStoryBoard.storyboard in Resources */,
 				AB11943D2A8A0AD700E54E79 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
