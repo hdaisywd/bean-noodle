@@ -21,6 +21,7 @@
 		AB1194522A8A396F00E54E79 /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194512A8A396F00E54E79 /* AddScreen.swift */; };
 		AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194532A8A3BB500E54E79 /* MessageScreen.swift */; };
 		AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */; };
+		ABA992DE2A8F56FA00E93D46 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA992DD2A8F56FA00E93D46 /* DetailScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		AB1194512A8A396F00E54E79 /* AddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScreen.swift; sourceTree = "<group>"; };
 		AB1194532A8A3BB500E54E79 /* MessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreen.swift; sourceTree = "<group>"; };
 		AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageScreen.swift; sourceTree = "<group>"; };
+		ABA992DD2A8F56FA00E93D46 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
 				AB1194432A8A0AD900E54E79 /* Info.plist */,
+				ABA992DD2A8F56FA00E93D46 /* DetailScreen.swift */,
 			);
 			path = BeanNoddle;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				AB11944E2A8A391000E54E79 /* HomeScreen.swift in Sources */,
 				AB1194362A8A0AD700E54E79 /* AppDelegate.swift in Sources */,
 				AB1194382A8A0AD700E54E79 /* SceneDelegate.swift in Sources */,
+				ABA992DE2A8F56FA00E93D46 /* DetailScreen.swift in Sources */,
 				4E82181D2A8DFAAC00250CE0 /* FeedManager.swift in Sources */,
 				AB11944C2A8A361B00E54E79 /* Extension.swift in Sources */,
 				AB1194522A8A396F00E54E79 /* AddScreen.swift in Sources */,
