@@ -161,6 +161,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         middleArea.alignment = .fill
         middleArea.spacing = 2
         
+        // var currentPage = Int(
         NSLayoutConstraint.activate([
             middleArea.bottomAnchor.constraint(equalTo: myCollectionView.bottomAnchor, constant: 20)
         ])
@@ -168,9 +169,16 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         pageControl.hidesForSinglePage = true
         pageControl.numberOfPages = images.count
         pageControl.currentPage = 0
+        
+//        if sender.direction == .left {
+//                pageControl.currentPage += 1
+//            } else if sender.direction == .right {
+//                pageControl.currentPage -= 1
+//            }
+        
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .black
-        // pageControl.center = view.center
+        
         middleArea.addArrangedSubview(pageControl)
         
         // 세번째 구역
@@ -192,6 +200,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
     }
+
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == myCollectionView {
