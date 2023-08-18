@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "plus.square.fill.on.square.fill@2x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "plus.square.fill.on.square.fill@2x 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "plus.square.fill.on.square.fill@2x 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
