@@ -49,15 +49,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2633E0FC2A8E68A2003492C1 /* MyPage */ = {
-			isa = PBXGroup;
-			children = (
-				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
-				2635CAE62A8A75C9005DC68A /* MyPageStoryBoard.storyboard */,
-			);
-			path = MyPage;
-			sourceTree = "<group>";
-		};
 		AB1194292A8A0AD700E54E79 = {
 			isa = PBXGroup;
 			children = (
@@ -84,7 +75,8 @@
 				AB1194512A8A396F00E54E79 /* AddScreen.swift */,
 				AB1194532A8A3BB500E54E79 /* MessageScreen.swift */,
 				AB11944D2A8A391000E54E79 /* HomeScreen.swift */,
-				2633E0FC2A8E68A2003492C1 /* MyPage */,
+				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
+				2635CAE62A8A75C9005DC68A /* MyPageStoryBoard.storyboard */,
 				AB11943B2A8A0AD700E54E79 /* Main.storyboard */,
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
