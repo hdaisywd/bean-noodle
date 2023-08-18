@@ -13,8 +13,12 @@ class HomeScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+<<<<<<< HEAD
+        view.backgroundColor = .white
+=======
         configureCollectionView()
         loadMovies()
+>>>>>>> main
     }
 }
 
