@@ -1,5 +1,6 @@
 import UIKit
 
+
 // 스와이프 할때마다 사진 리로드
 // 사진 클릭시 디테일뷰로 전환
 // 디테일뷰에서 이미지 전달
@@ -23,6 +24,7 @@ class HomeScreen: UIViewController {
         view.backgroundColor = .white
         
         configureCollectionView()
+
         loadMovies() 
     }
 }
@@ -44,7 +46,6 @@ extension HomeScreen {
 }
 
 extension HomeScreen: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = (collectionView.frame.width / 3) - 1.0  // 가로 방향으로 3개의 아이템을 정렬
         let height: CGFloat = width * 1.5  // 이미지 비율에 맞게 높이 설정

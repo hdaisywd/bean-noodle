@@ -97,7 +97,6 @@
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
 				AB1194432A8A0AD900E54E79 /* Info.plist */,
-				ABA992DD2A8F56FA00E93D46 /* DetailScreen.swift */,
 			);
 			path = BeanNoddle;
 			sourceTree = "<group>";
