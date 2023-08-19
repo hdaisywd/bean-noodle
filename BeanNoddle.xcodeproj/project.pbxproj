@@ -92,12 +92,12 @@
 				AB1194532A8A3BB500E54E79 /* MessageScreen.swift */,
 				AB11944D2A8A391000E54E79 /* HomeScreen.swift */,
 				4E8218602A8E9CB000250CE0 /* FeedCollectionView.swift */,
+				ABA992DD2A8F56FA00E93D46 /* DetailScreen.swift */,
 				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
 				AB11943B2A8A0AD700E54E79 /* Main.storyboard */,
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
 				AB1194432A8A0AD900E54E79 /* Info.plist */,
-				ABA992DD2A8F56FA00E93D46 /* DetailScreen.swift */,
 			);
 			path = BeanNoddle;
 			sourceTree = "<group>";
