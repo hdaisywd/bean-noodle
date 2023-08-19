@@ -8,11 +8,11 @@
 import UIKit
 
 class FeedCollectionView: UICollectionViewCell {
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        self.cellSetting()
-//    }
-//    required init?(coder: NSCoder) {
-//        fatalError()
-//    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.cellSetting()
+    }
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
 }
