@@ -36,6 +36,7 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
         
         self.navigationItem.title = "New Post"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonAction))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonAction))
         
         addImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addImageView)
@@ -47,26 +48,14 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
             addImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
 
-        let addBtn = UIButton()
-        addBtn.setImage(UIImage(named: "AddPhotoIcon"), for: .normal)
-        view.addSubview(addBtn)
-
-        addBtn.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            addBtn.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor),
-            addBtn.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor),
-        ])
-
-        addBtn.addTarget(self, action: #selector(addBtnAction), for: .touchUpInside)
-        
         selectedImages.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectedImages)
         
         NSLayoutConstraint.activate([
-            selectedImages.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            selectedImages.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            selectedImages.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            selectedImages.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+            selectedImages.trailingAnchor.constraint(equalTo: addImageView.trailingAnchor, constant: 1),
+            selectedImages.leadingAnchor.constraint(equalTo: addImageView.leadingAnchor, constant: -1),
+            selectedImages.topAnchor.constraint(equalTo: addImageView.topAnchor),
+            selectedImages.bottomAnchor.constraint(equalTo: addImageView.bottomAnchor)
         ])
 
         let emotionStackView = UIStackView()
@@ -225,6 +214,11 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
     @objc func doneButtonAction() {
         let content = textView.text
         saveData(1, 1, emotionSelectedNumber, content ?? "")
+        self.dismiss(animated: true)
+    }
+    
+    // 취소 버튼 누르기
+    @objc func cancelButtonAction() {
         self.dismiss(animated: true)
     }
     
