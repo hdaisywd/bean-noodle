@@ -2,8 +2,8 @@ import UIKit
 import CoreData
 import Foundation
 
-class CoreDataManager {
-    static let shared = CoreDataManager()
+class PostDataManager {
+    static let shared = PostDataManager()
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CoreData")
@@ -19,7 +19,7 @@ class CoreDataManager {
         return persistentContainer.viewContext
     }
 
-    func saveData(postId: NSUUID, userId: NSUUID, emotionSelectedNumber: Int, content: String, imageList: [Data]) {
+    func savePostData(postId: NSUUID, userId: NSUUID, emotionSelectedNumber: Int, content: String, imageList: [Data]) {
         let context = persistentContainer.viewContext
 
         let postEntity = NSEntityDescription.entity(forEntityName: "Post", in: context)
@@ -54,12 +54,13 @@ class CoreDataManager {
         }
     }
     
-    func fetchPosts() {
+    func fetchPosts() -> [Post] {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
         
+        var retPost = [Post]()
         do {
             let fetchedPosts = try context.fetch(fetchRequest)
             for post in fetchedPosts {
@@ -68,11 +69,14 @@ class CoreDataManager {
                 let emotion = post.emotion_num
                 let content = post.post_text
                 
+                retPost.append(post)
                 print("Post ID: \(postId), User ID: \(userId), Emotion: \(emotion), Content: \(content)")
             }
         } catch {
             print(error.localizedDescription)
         }
+        
+        return retPost
     }
 }
 

@@ -238,7 +238,7 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
     }
     
     func saveData(_ postId: NSUUID, _ userId: NSUUID, _ emotionSelectedNumber: Int, _ content: String, _ imageList: [Data]) {
-        CoreDataManager.shared.saveData(
+        PostDataManager.shared.savePostData(
             postId: postId,
             userId: userId,
             emotionSelectedNumber: emotionSelectedNumber,
@@ -246,7 +246,7 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
             imageList: imageList
         )
         
-        CoreDataManager.shared.fetchPosts()
+        PostDataManager.shared.fetchPosts()
         print("저장 완료됐습니다")
     }
 

@@ -31,13 +31,17 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         
     }
     
+    func fetchUserPosts() {
+        
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? UICollectionViewCell else {
-            return UICollectionViewCell()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
+        // 셀 커스터마이징 및 데이터 설정
+
         return cell
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,12 +62,6 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     
 }
 
-func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UICollectionViewCell
-    // 셀 커스터마이징 및 데이터 설정
-    return cell
-}
-
 extension MyPageScreen: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = (collectionView.frame.width / 3) - 1.0
@@ -71,3 +69,12 @@ extension MyPageScreen: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
 }
+
+class CustomCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
+    
+    func configure(with image: UIImage) {
+        imageView.image = image
+    }
+}
+
