@@ -49,7 +49,6 @@ class AddScreen: UIViewController {
         emotionStackView.distribution = .fillEqually
         emotionStackView.alignment = .fill
         emotionStackView.spacing = 5
-        emotionStackView.backgroundColor = .lightGray
 
         NSLayoutConstraint.activate([
             emotionStackView.leadingAnchor.constraint(equalTo: addImageView.leadingAnchor),
