@@ -53,6 +53,7 @@ class UserDataManager {
         do {
             let fetchedPost = try context.fetch(fetchRequest)
             for eachPost in fetchedPost {
+                print(eachPost.user_id)
                 if eachPost.user_id == userId as UUID {
                     retPosts.append(eachPost)
                 }
