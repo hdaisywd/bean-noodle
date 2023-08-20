@@ -70,6 +70,7 @@ extension HomeScreen: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCell", for: indexPath) as! FeedCell
         let feedItem = searchResults[indexPath.item]
         cell.configure(with: feedItem)
+        print(indexPath)
         return cell
     }
 }
@@ -95,6 +96,14 @@ extension HomeScreen: UIScrollViewDelegate {
         }
     }
 }
+extension HomeScreen: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let feedItem = searchResults[indexPath.item]
+        let vc = DetailScreen(feed: feedItem)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
 
 extension HomeScreen {
     
