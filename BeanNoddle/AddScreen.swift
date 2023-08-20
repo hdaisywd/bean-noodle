@@ -16,7 +16,8 @@ struct NewPost {
     var text: String
 }
 
-class AddScreen: UIViewController {
+class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var selectedImages = UIImageView()
     let addImageView = UIView()
     let textView = UITextView()
     let textViewPlaceHolder = "Write a caption..."
@@ -35,6 +36,7 @@ class AddScreen: UIViewController {
         
         self.navigationItem.title = "New Post"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonAction))
+        
         addImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addImageView)
 
@@ -56,6 +58,16 @@ class AddScreen: UIViewController {
         ])
 
         addBtn.addTarget(self, action: #selector(addBtnAction), for: .touchUpInside)
+        
+        selectedImages.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(selectedImages)
+        
+        NSLayoutConstraint.activate([
+            selectedImages.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            selectedImages.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            selectedImages.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            selectedImages.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
 
         let emotionStackView = UIStackView()
         view.addSubview(emotionStackView)
@@ -190,18 +202,34 @@ class AddScreen: UIViewController {
         }
     }
     
+    // 갤러리에서 이미지 불러오기
     @objc func addBtnAction() {
-
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        print("imagePicker 버튼 눌림")
+        
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("이미지 선택")
+        picker.dismiss(animated: true) { () in
+            let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            self.selectedImages.image = img
+            self.selectedImages.backgroundColor = .lightGray
+        }
     }
 
+    // 저장 버튼 누르기
     @objc func doneButtonAction() {
         let content = textView.text
-        getEntity(1, 1, emotionSelectedNumber, content ?? "")
+        saveData(1, 1, emotionSelectedNumber, content ?? "")
         self.dismiss(animated: true)
     }
     
-    //Entity를 불러오기 위한 함수
-    func getEntity(_ postId: Int16, _ userId: Int16, _ emotionSelectedNumber: Int, _ content: String) {
+    // 코어데이터에 데이터 저장 
+    func saveData(_ postId: Int16, _ userId: Int16, _ emotionSelectedNumber: Int, _ content: String) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -238,7 +266,6 @@ class AddScreen: UIViewController {
                 let emotion = post.emotion_num
                 let content = post.post_text
                 
-                // Do something with the fetched data
                 print("Post ID: \(postId), User ID: \(userId), Emotion: \(emotion), Content: \(content)")
             }
         } catch {
@@ -261,6 +288,8 @@ class AddScreen: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.textView.resignFirstResponder()
     }
+    
+
 
 }
 
