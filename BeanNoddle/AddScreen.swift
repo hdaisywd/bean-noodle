@@ -9,18 +9,6 @@ import Foundation
 import UIKit
 import CoreData
 
-struct NewPost {
-    var postId: Int16
-    var userId: Int16
-    var emotion: Int16
-    var text: String
-}
-
-struct NewPicture {
-    var picture: Data
-    var postId: Int16
-}
-
 class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var selectedImages = UIImageView()
     let addImageView = UIView()
@@ -238,7 +226,9 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
     // 저장 버튼 누르기
     @objc func doneButtonAction() {
         let content = textView.text
-        saveData(1, 1, emotionSelectedNumber, content ?? "")
+        let userId = UUID() as NSUUID
+        let postId = UUID() as NSUUID
+        saveData(userId, postId, emotionSelectedNumber, content ?? "", imageList)
         self.dismiss(animated: true)
     }
     
@@ -247,43 +237,17 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
         self.dismiss(animated: true)
     }
     
-    // 코어데이터에 데이터 저장 
-    func saveData(_ postId: Int16, _ userId: Int16, _ emotionSelectedNumber: Int, _ content: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
+    func saveData(_ postId: NSUUID, _ userId: NSUUID, _ emotionSelectedNumber: Int, _ content: String, _ imageList: [Data]) {
+        CoreDataManager.shared.saveData(
+            postId: postId,
+            userId: userId,
+            emotionSelectedNumber: emotionSelectedNumber,
+            content: content,
+            imageList: imageList
+        )
         
-        let post = NewPost(postId: postId, userId: userId, emotion: Int16(emotionSelectedNumber), text: content)
-        let postEntity = NSEntityDescription.entity(forEntityName: "Post", in: context)
-        
-        if let postEntity = postEntity {
-            let newPost = NSManagedObject(entity: postEntity, insertInto: context)
-            newPost.setValue(post.postId, forKey: "post_id")
-            newPost.setValue(post.userId, forKey: "user_id")
-            newPost.setValue(post.text, forKey: "post_text")
-            newPost.setValue(post.emotion, forKey: "emotion_num")
-            
-            do {
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        
-        let pictureEntity = NSEntityDescription.entity(forEntityName: "Picture", in: context)
-        for image in imageList {
-            if let pictureEntity = pictureEntity {
-                let newPicture = NSManagedObject(entity: pictureEntity, insertInto: context)
-                newPicture.setValue(image, forKey: "picture")
-                newPicture.setValue(postId, forKey: "post_id")
-            }
-            
-            do {
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        
+        fetchPosts()
+        print("저장 완료됐습니다")
     }
     
     func fetchPosts() {
