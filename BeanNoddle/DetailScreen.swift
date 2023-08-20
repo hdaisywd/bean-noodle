@@ -5,12 +5,16 @@
 //  Created by Daisy Hong on 2023/08/15.
 //
 
+
 import Foundation
 import UIKit
 
-var images = ["01", "02", "03"] 
+var images = ["01", "02", "03"]
 
 class CustomCell: UICollectionViewCell {
+    
+    
+    
     let imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -25,8 +29,15 @@ class CustomCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("Error!")
+        
+    }
+    func configure(with feed: Feed) {
+        if let posterPath = URL(string: "https://image.tmdb.org/t/p/w500\(feed.posterPath)") {
+            imageView.loadImage(from: posterPath)
+        }
     }
 }
 
@@ -35,9 +46,20 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     
     var myCollectionView: UICollectionView!
     let pageControl = UIPageControl()
-
+    
+    var feed: Feed
+    init(feed: Feed) {
+        self.feed = feed
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(feed)
         view.backgroundColor = .white
         
         // title을 두 줄로 바꾸기
@@ -79,7 +101,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         ])
         
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-
+        
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
         contentViewHeight.priority = .defaultLow
         contentViewHeight.isActive = true
@@ -135,7 +157,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         myCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width), height: (UIScreen.main.bounds.width))
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -143,10 +165,10 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         
         stackView.addArrangedSubview(myCollectionView)
         
-//        NSLayoutConstraint.activate([
-//            myCollectionView.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 150)
-//        ])
-
+        //        NSLayoutConstraint.activate([
+        //            myCollectionView.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 150)
+        //        ])
+        
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.register(CustomCell.self, forCellWithReuseIdentifier: "cell")
@@ -170,11 +192,11 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         pageControl.numberOfPages = images.count
         pageControl.currentPage = 0
         
-//        if sender.direction == .left {
-//                pageControl.currentPage += 1
-//            } else if sender.direction == .right {
-//                pageControl.currentPage -= 1
-//            }
+        //        if sender.direction == .left {
+        //                pageControl.currentPage += 1
+        //            } else if sender.direction == .right {
+        //                pageControl.currentPage -= 1
+        //            }
         
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .black
@@ -200,7 +222,7 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         
         
     }
-
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == myCollectionView {
@@ -211,15 +233,15 @@ class DetailScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCell
-        cell.imageView.image = UIImage(named: images[indexPath.row])
+        cell.configure(with: feed)
         return cell
     }
     
-
+    
     
 }
