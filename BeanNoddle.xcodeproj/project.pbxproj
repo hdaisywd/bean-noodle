@@ -23,6 +23,7 @@
 		AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194532A8A3BB500E54E79 /* MessageScreen.swift */; };
 		AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */; };
 		ABEED5252A91E33C00FAB598 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5242A91E33C00FAB598 /* DetailScreen.swift */; };
+		ABEED5282A91F1E900FAB598 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5262A91F1E900FAB598 /* CoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		AB1194532A8A3BB500E54E79 /* MessageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreen.swift; sourceTree = "<group>"; };
 		AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageScreen.swift; sourceTree = "<group>"; };
 		ABEED5242A91E33C00FAB598 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
+		ABEED5272A91F1E900FAB598 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
 				AB1194432A8A0AD900E54E79 /* Info.plist */,
+				ABEED5262A91F1E900FAB598 /* CoreData.xcdatamodeld */,
 			);
 			path = BeanNoddle;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				4E82181F2A8DFB7500250CE0 /* ShowFeed.swift in Sources */,
 				AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */,
 				AB11943A2A8A0AD700E54E79 /* ViewController.swift in Sources */,
+				ABEED5282A91F1E900FAB598 /* CoreData.xcdatamodeld in Sources */,
 				AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */,
 				4ED316DA2A8F49410053F33D /* FeedCell.swift in Sources */,
 				AB11944E2A8A391000E54E79 /* HomeScreen.swift in Sources */,
@@ -408,6 +412,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ABEED5262A91F1E900FAB598 /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ABEED5272A91F1E900FAB598 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = ABEED5272A91F1E900FAB598 /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AB11942A2A8A0AD700E54E79 /* Project object */;
 }
