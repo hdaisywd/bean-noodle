@@ -16,11 +16,18 @@ struct NewPost {
     var text: String
 }
 
+struct NewPicture {
+    var picture: Data
+    var postId: Int16
+}
+
 class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var selectedImages = UIImageView()
     let addImageView = UIView()
     let textView = UITextView()
     let textViewPlaceHolder = "Write a caption..."
+    
+    var imageList = [Data]()
     
     // emotion Button 모음
     var emotionSelectedNumber = 0
@@ -66,8 +73,8 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
         view.addSubview(selectedImages)
         
         NSLayoutConstraint.activate([
-            selectedImages.trailingAnchor.constraint(equalTo: addImageView.trailingAnchor, constant: 1),
-            selectedImages.leadingAnchor.constraint(equalTo: addImageView.leadingAnchor, constant: -1),
+            selectedImages.trailingAnchor.constraint(equalTo: addImageView.trailingAnchor),
+            selectedImages.leadingAnchor.constraint(equalTo: addImageView.leadingAnchor),
             selectedImages.topAnchor.constraint(equalTo: addImageView.topAnchor),
             selectedImages.bottomAnchor.constraint(equalTo: addImageView.bottomAnchor)
         ])
@@ -221,6 +228,10 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
             let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
             self.selectedImages.image = img
             self.selectedImages.backgroundColor = .lightGray
+            
+            if let imageData = img?.pngData() {
+                self.imageList.append(imageData)
+            }
         }
     }
 
@@ -242,11 +253,10 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
         let context = appDelegate.persistentContainer.viewContext
         
         let post = NewPost(postId: postId, userId: userId, emotion: Int16(emotionSelectedNumber), text: content)
+        let postEntity = NSEntityDescription.entity(forEntityName: "Post", in: context)
         
-        let entity = NSEntityDescription.entity(forEntityName: "Post", in: context)
-        
-        if let entity = entity {
-            let newPost = NSManagedObject(entity: entity, insertInto: context)
+        if let postEntity = postEntity {
+            let newPost = NSManagedObject(entity: postEntity, insertInto: context)
             newPost.setValue(post.postId, forKey: "post_id")
             newPost.setValue(post.userId, forKey: "user_id")
             newPost.setValue(post.text, forKey: "post_text")
@@ -258,6 +268,22 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
                 print(error.localizedDescription)
             }
         }
+        
+        let pictureEntity = NSEntityDescription.entity(forEntityName: "Picture", in: context)
+        for image in imageList {
+            if let pictureEntity = pictureEntity {
+                let newPicture = NSManagedObject(entity: pictureEntity, insertInto: context)
+                newPicture.setValue(image, forKey: "picture")
+                newPicture.setValue(postId, forKey: "post_id")
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
     }
     
     func fetchPosts() {
