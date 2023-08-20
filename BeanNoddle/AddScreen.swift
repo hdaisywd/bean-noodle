@@ -245,8 +245,7 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
             content: content,
             imageList: imageList
         )
-        
-        PostDataManager.shared.fetchPosts()
+
         print("저장 완료됐습니다")
     }
 

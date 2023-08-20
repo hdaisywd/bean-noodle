@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import CoreData
+
+// 임의로 userId 발급받게 해줬습니다. 추후 수정
+let globalUserId: UUID = UUID()
 
 class ViewController: UITabBarController, UITabBarControllerDelegate {
 
@@ -13,6 +17,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.delegate = self
+        
+        // 임의로 userId 발급받게 해줬습니다. 추후 수정
+        UserDataManager.shared.createUser(globalUserId)
         
         // tab bar 아이콘 설정 1
         let firstVC = UINavigationController(rootViewController: HomeScreen())
