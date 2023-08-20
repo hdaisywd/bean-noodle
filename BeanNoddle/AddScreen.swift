@@ -16,6 +16,7 @@ class AddScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
         self.navigationItem.title = "New Post"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonAction))
@@ -58,15 +59,15 @@ class AddScreen: UIViewController {
         ])
 
         let heartEyesBtn = UIButton()
-        heartEyesBtn.setImage(UIImage(named: "HeartEyesIcon"), for: .normal)
+        heartEyesBtn.setImage(UIImage(named: "heartEyesIcon"), for: .normal)
         heartEyesBtn.imageView?.contentMode = .scaleAspectFit
 
         let sadBtn = UIButton()
-        sadBtn.setImage(UIImage(named: "SadIcon"), for: .normal)
+        sadBtn.setImage(UIImage(named: "sadIcon"), for: .normal)
         sadBtn.imageView?.contentMode = .scaleAspectFit
 
         let itWasOkayBtn = UIButton()
-        itWasOkayBtn.setImage(UIImage(named: "ItWasOkayIcon"), for: .normal)
+        itWasOkayBtn.setImage(UIImage(named: "itWasOkayIcon"), for: .normal)
         itWasOkayBtn.imageView?.contentMode = .scaleAspectFit
         
         let thinkingBtn = UIButton()
@@ -110,11 +111,11 @@ class AddScreen: UIViewController {
     }
 
     @objc func addBtnAction() {
-
+        
     }
 
     @objc func doneButtonAction() {
-
+        self.dismiss(animated: true)
     }
 
     func setLineDot(view: UIView, color: UIColor, radius: CGFloat){
