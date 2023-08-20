@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 struct NewPost {
     var postId: Int16
@@ -16,7 +17,6 @@ struct NewPost {
 }
 
 class AddScreen: UIViewController {
-    
     let addImageView = UIView()
     let textView = UITextView()
     let textViewPlaceHolder = "Write a caption..."
@@ -196,10 +196,56 @@ class AddScreen: UIViewController {
 
     @objc func doneButtonAction() {
         let content = textView.text
-        let newPost = NewPost(postId: 1, userId: 1, emotion: Int16(emotionSelectedNumber), text: content ?? "")
-        print(newPost.emotion, newPost.postId, newPost.text, newPost.userId)
+        getEntity(1, 1, emotionSelectedNumber, content ?? "")
         self.dismiss(animated: true)
     }
+    
+    //Entity를 불러오기 위한 함수
+    func getEntity(_ postId: Int16, _ userId: Int16, _ emotionSelectedNumber: Int, _ content: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let post = NewPost(postId: postId, userId: userId, emotion: Int16(emotionSelectedNumber), text: content)
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Post", in: context)
+        
+        if let entity = entity {
+            let newPost = NSManagedObject(entity: entity, insertInto: context)
+            newPost.setValue(post.postId, forKey: "post_id")
+            newPost.setValue(post.userId, forKey: "user_id")
+            newPost.setValue(post.text, forKey: "post_text")
+            newPost.setValue(post.emotion, forKey: "emotion_num")
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchPosts() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+        
+        do {
+            let fetchedPosts = try context.fetch(fetchRequest)
+            for post in fetchedPosts {
+                let postId = post.post_id
+                let userId = post.user_id
+                let emotion = post.emotion_num
+                let content = post.post_text
+                
+                // Do something with the fetched data
+                print("Post ID: \(postId), User ID: \(userId), Emotion: \(emotion), Content: \(content)")
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
 
     func setLineDot(view: UIView, color: UIColor, radius: CGFloat){
         let borderLayer = CAShapeLayer()
