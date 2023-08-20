@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2653F5BF2A92085E00B96FAD /* MyPageStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2653F5BE2A92085E00B96FAD /* MyPageStoryBoard.storyboard */; };
 		4E82181D2A8DFAAC00250CE0 /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E82181C2A8DFAAC00250CE0 /* FeedManager.swift */; };
 		4E82181F2A8DFB7500250CE0 /* ShowFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E82181E2A8DFB7500250CE0 /* ShowFeed.swift */; };
 		4ED316DA2A8F49410053F33D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED316D92A8F49410053F33D /* FeedCell.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2653F5BE2A92085E00B96FAD /* MyPageStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyPageStoryBoard.storyboard; sourceTree = "<group>"; };
 		4E82181C2A8DFAAC00250CE0 /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
 		4E82181E2A8DFB7500250CE0 /* ShowFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFeed.swift; sourceTree = "<group>"; };
 		4ED316D92A8F49410053F33D /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				ABEED5242A91E33C00FAB598 /* DetailScreen.swift */,
 				4ED316D92A8F49410053F33D /* FeedCell.swift */,
 				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
+				2653F5BE2A92085E00B96FAD /* MyPageStoryBoard.storyboard */,
 				AB11943B2A8A0AD700E54E79 /* Main.storyboard */,
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
@@ -162,6 +165,7 @@
 			files = (
 				AB1194422A8A0AD900E54E79 /* LaunchScreen.storyboard in Resources */,
 				AB11943F2A8A0AD900E54E79 /* Assets.xcassets in Resources */,
+				2653F5BF2A92085E00B96FAD /* MyPageStoryBoard.storyboard in Resources */,
 				AB11943D2A8A0AD700E54E79 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
