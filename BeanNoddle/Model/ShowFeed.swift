@@ -22,7 +22,7 @@ class APIcaller {
     
     
     
-    func getTrendingMovies(completion: @escaping (Result<[Feed], Error>) -> Void) {
+    func getTrendingMovies(page: Int, completion: @escaping (Result<[Feed], Error>) -> Void) {
         guard let url = URL(string: "\(Constants.baseURL)/3/movie/popular?api_key=\(Constants.API_KEY)") else {return}
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {
@@ -44,7 +44,7 @@ class APIcaller {
         }
         
     
-        func getDiscoverMovies(completion: @escaping (Result<[Feed], Error>) -> Void) {
+    func getDiscoverMovies(page: Int, completion: @escaping (Result<[Feed], Error>) -> Void) {
             
             guard let url = URL(string: "\(Constants.baseURL)/3/discover/movie?api_key=\(Constants.API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate") else {return }
             let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
