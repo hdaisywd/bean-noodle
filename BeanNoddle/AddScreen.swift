@@ -8,12 +8,26 @@
 import Foundation
 import UIKit
 
+struct NewPost {
+    var postId: Int16
+    var userId: Int16
+    var emotion: Int16
+    var text: String
+}
+
 class AddScreen: UIViewController {
     
     let addImageView = UIView()
     let textView = UITextView()
     let textViewPlaceHolder = "Write a caption..."
-    let contect = ""
+    
+    // emotion Button 모음
+    var emotionSelectedNumber = 0
+    let heartEyesBtn = UIButton()
+    let sadBtn = UIButton()
+    let itWasOkayBtn = UIButton()
+    let thinkingBtn = UIButton()
+    let angryBtn = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,26 +72,26 @@ class AddScreen: UIViewController {
             emotionStackView.bottomAnchor.constraint(equalTo: addImageView.bottomAnchor, constant: 40)
         ])
 
-        let heartEyesBtn = UIButton()
+        // emotion button 생성
         heartEyesBtn.setImage(UIImage(named: "heartEyesIcon"), for: .normal)
         heartEyesBtn.imageView?.contentMode = .scaleAspectFit
+        heartEyesBtn.addTarget(self, action: #selector(heartEyesBtnAction), for: .touchUpInside)
 
-        let sadBtn = UIButton()
         sadBtn.setImage(UIImage(named: "sadIcon"), for: .normal)
         sadBtn.imageView?.contentMode = .scaleAspectFit
+        sadBtn.addTarget(self, action: #selector(sadBtnAction), for: .touchUpInside)
 
-        let itWasOkayBtn = UIButton()
         itWasOkayBtn.setImage(UIImage(named: "itWasOkayIcon"), for: .normal)
         itWasOkayBtn.imageView?.contentMode = .scaleAspectFit
+        itWasOkayBtn.addTarget(self, action: #selector(itWasOkayBtnAction), for: .touchUpInside)
         
-        let thinkingBtn = UIButton()
         thinkingBtn.setImage(UIImage(named: "ThinkingIcon"), for: .normal)
         thinkingBtn.imageView?.contentMode = .scaleAspectFit
+        thinkingBtn.addTarget(self, action: #selector(thinkingBtnAction), for: .touchUpInside)
         
-        let angryBtn = UIButton()
         angryBtn.setImage(UIImage(named: "AngryIcon"), for: .normal)
         angryBtn.imageView?.contentMode = .scaleAspectFit
-
+        angryBtn.addTarget(self, action: #selector(angryBtnAction), for: .touchUpInside)
  
         for icon in [heartEyesBtn, sadBtn, itWasOkayBtn, thinkingBtn, angryBtn] {
             emotionStackView.addArrangedSubview(icon)
@@ -104,21 +118,86 @@ class AddScreen: UIViewController {
         super.viewDidAppear(animated)
         setLineDot(view: addImageView, color: UIColor.gray, radius: 10)
     }
-
-    @objc func btnAction() {
-        let vc = DetailScreen()
-        self.navigationController?.pushViewController(vc, animated: true)
+    
+    // emotion 관련 button
+    @objc func heartEyesBtnAction() {
+        if emotionSelectedNumber != 1 {
+            for icon in [sadBtn, itWasOkayBtn, thinkingBtn, angryBtn] {
+                icon.isEnabled = false
+            }
+            emotionSelectedNumber = 1
+        } else {
+            for icon in [sadBtn, itWasOkayBtn, thinkingBtn, angryBtn] {
+                icon.isEnabled = true
+            }
+            emotionSelectedNumber = 0
+        }
     }
-
+    
+    @objc func sadBtnAction() {
+        if emotionSelectedNumber != 2 {
+            for icon in [heartEyesBtn, itWasOkayBtn, thinkingBtn, angryBtn] {
+                icon.isEnabled = false
+            }
+            emotionSelectedNumber = 2
+        } else {
+            for icon in [heartEyesBtn, itWasOkayBtn, thinkingBtn, angryBtn] {
+                icon.isEnabled = true
+            }
+            emotionSelectedNumber = 0
+        }
+    }
+    
+    @objc func itWasOkayBtnAction() {
+        if emotionSelectedNumber != 3 {
+            for icon in [heartEyesBtn, sadBtn, thinkingBtn, angryBtn] {
+                icon.isEnabled = false
+            }
+            emotionSelectedNumber = 3
+        } else {
+            for icon in [heartEyesBtn, sadBtn, thinkingBtn, angryBtn] {
+                icon.isEnabled = true
+            }
+            emotionSelectedNumber = 0
+        }
+    }
+    
+    @objc func thinkingBtnAction() {
+        if emotionSelectedNumber != 4 {
+            for icon in [heartEyesBtn, sadBtn, itWasOkayBtn, angryBtn] {
+                icon.isEnabled = false
+            }
+            emotionSelectedNumber = 4
+        } else {
+            for icon in [heartEyesBtn, sadBtn, itWasOkayBtn, angryBtn] {
+                icon.isEnabled = true
+            }
+            emotionSelectedNumber = 0
+        }
+    }
+    
+    @objc func angryBtnAction() {
+        if emotionSelectedNumber != 5 {
+            for icon in [heartEyesBtn, sadBtn, itWasOkayBtn, thinkingBtn] {
+                icon.isEnabled = false
+            }
+            emotionSelectedNumber = 5
+        } else {
+            for icon in [heartEyesBtn, sadBtn, itWasOkayBtn, thinkingBtn] {
+                icon.isEnabled = true
+            }
+            emotionSelectedNumber = 0
+        }
+    }
+    
     @objc func addBtnAction() {
 
     }
 
     @objc func doneButtonAction() {
-        if let content = textView.text {
-            print("내용이 content에 저장되었습니다.")
-            print(content)
-        }
+        let content = textView.text
+        let newPost = NewPost(postId: 1, userId: 1, emotion: Int16(emotionSelectedNumber), text: content ?? "")
+        print(newPost.emotion, newPost.postId, newPost.text, newPost.userId)
         self.dismiss(animated: true)
     }
 
@@ -156,11 +235,4 @@ extension AddScreen: UITextViewDelegate {
         }
     }
     
-}
-
-struct Post_struct {
-    var postId: Int16
-    var userId: Int16
-    var emotion: Int16
-    var text: String
 }
