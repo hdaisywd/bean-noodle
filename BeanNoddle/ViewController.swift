@@ -26,7 +26,15 @@ class ViewController: UITabBarController {
         let messageIcon = UIImage(named: "MessageIcon")
         thirdVC.tabBarItem = UITabBarItem(title: "Message", image: messageIcon, tag: 2)
         // tab bar 아이콘 설정 4
-        let fourthVC = MyPageScreen()
+        let fourthVCStoryBoard = UIStoryboard(name: "MyPageStoryBoard", bundle: nil)
+        
+        let fourthVC = fourthVCStoryBoard.instantiateViewController(withIdentifier: "MyPageStoryBoard") as! MyPageScreen
+        
+        //선택시 이동
+        navigationController?.pushViewController(fourthVC, animated: true)
+        if let navigationController = viewControllers?[3] as? UINavigationController { navigationController.pushViewController(fourthVC, animated: false)
+        }
+        
         let myPageIcon = UIImage(named: "MyPageIcon")
         fourthVC.tabBarItem = UITabBarItem(title: "MyPage", image: myPageIcon, tag: 3)
 

@@ -17,16 +17,22 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var FollowerCount: UILabel!
     @IBOutlet weak var FollowingCount: UILabel!
     
-    @IBOutlet weak var highlightCollectionView: UICollectionView!
+    @IBAction func profileEditButton(_ sender: UIButton) {
+    }
+    
+    @IBAction func profileShare(_ sender: UIButton) {
+    }
     
     
-    func collectionView(_ highlightCollectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
         
     }
-    //다시 만들어야됨
-    func collectionView(_ highlightCollectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = highlightCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? UICollectionViewCell else {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? UICollectionViewCell else {
             return UICollectionViewCell()
         }
         return cell
@@ -35,9 +41,16 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        highlightCollectionView.dataSource = self
-        highlightCollectionView.delegate = self
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let spacing: CGFloat = 10
+            let itemWidth = (collectionView.frame.width - spacing) / 2
+            layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+            layout.minimumInteritemSpacing = spacing
+            layout.minimumLineSpacing = spacing
+        }
         
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
@@ -45,4 +58,9 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     
 }
 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UICollectionViewCell
+        // 셀 커스터마이징 및 데이터 설정
+        return cell
+    }
 
