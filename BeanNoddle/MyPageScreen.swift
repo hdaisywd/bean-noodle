@@ -39,7 +39,6 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
         highlightCollectionView.delegate = self
         
         
-        
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
     }
