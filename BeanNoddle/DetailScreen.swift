@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-var images = ["01", "02", "03"]
+var images = ["01", "02", "03"] 
 
 class CustomCell: UICollectionViewCell {
     let imageView = UIImageView()
