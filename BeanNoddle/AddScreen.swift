@@ -246,31 +246,9 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
             imageList: imageList
         )
         
-        fetchPosts()
+        CoreDataManager.shared.fetchPosts()
         print("저장 완료됐습니다")
     }
-    
-    func fetchPosts() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-        
-        do {
-            let fetchedPosts = try context.fetch(fetchRequest)
-            for post in fetchedPosts {
-                let postId = post.post_id
-                let userId = post.user_id
-                let emotion = post.emotion_num
-                let content = post.post_text
-                
-                print("Post ID: \(postId), User ID: \(userId), Emotion: \(emotion), Content: \(content)")
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-
 
     func setLineDot(view: UIView, color: UIColor, radius: CGFloat){
         let borderLayer = CAShapeLayer()
