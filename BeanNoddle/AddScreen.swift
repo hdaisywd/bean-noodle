@@ -47,6 +47,20 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
             addImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             addImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
+        
+        let addPhotoBtn = UIButton()
+        addPhotoBtn.setImage(UIImage(named: "AddPhotoIcon"), for: .normal)
+        addPhotoBtn.imageView?.contentMode = .scaleAspectFit
+        addPhotoBtn.addTarget(self, action: #selector(addBtnAction), for: .touchUpInside)
+        addPhotoBtn.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addPhotoBtn)
+        
+        NSLayoutConstraint.activate([
+            addPhotoBtn.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor),
+            addPhotoBtn.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor),
+            addPhotoBtn.widthAnchor.constraint(equalToConstant: 100),
+            addPhotoBtn.heightAnchor.constraint(equalToConstant: 100)
+        ])
 
         selectedImages.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectedImages)
