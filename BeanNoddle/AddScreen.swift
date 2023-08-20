@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 struct NewPost {
     var postId: Int16
@@ -15,11 +16,18 @@ struct NewPost {
     var text: String
 }
 
-class AddScreen: UIViewController {
-    
+struct NewPicture {
+    var picture: Data
+    var postId: Int16
+}
+
+class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var selectedImages = UIImageView()
     let addImageView = UIView()
     let textView = UITextView()
     let textViewPlaceHolder = "Write a caption..."
+    
+    var imageList = [Data]()
     
     // emotion Button 모음
     var emotionSelectedNumber = 0
@@ -35,6 +43,8 @@ class AddScreen: UIViewController {
         
         self.navigationItem.title = "New Post"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonAction))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonAction))
+        
         addImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addImageView)
 
@@ -44,18 +54,30 @@ class AddScreen: UIViewController {
             addImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             addImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
-
-        let addBtn = UIButton()
-        addBtn.setImage(UIImage(named: "AddPhotoIcon"), for: .normal)
-        view.addSubview(addBtn)
-
-        addBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        let addPhotoBtn = UIButton()
+        addPhotoBtn.setImage(UIImage(named: "AddPhotoIcon"), for: .normal)
+        addPhotoBtn.imageView?.contentMode = .scaleAspectFit
+        addPhotoBtn.addTarget(self, action: #selector(addBtnAction), for: .touchUpInside)
+        addPhotoBtn.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addPhotoBtn)
+        
         NSLayoutConstraint.activate([
-            addBtn.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor),
-            addBtn.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor),
+            addPhotoBtn.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor),
+            addPhotoBtn.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor),
+            addPhotoBtn.widthAnchor.constraint(equalToConstant: 100),
+            addPhotoBtn.heightAnchor.constraint(equalToConstant: 100)
         ])
 
-        addBtn.addTarget(self, action: #selector(addBtnAction), for: .touchUpInside)
+        selectedImages.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(selectedImages)
+        
+        NSLayoutConstraint.activate([
+            selectedImages.trailingAnchor.constraint(equalTo: addImageView.trailingAnchor),
+            selectedImages.leadingAnchor.constraint(equalTo: addImageView.leadingAnchor),
+            selectedImages.topAnchor.constraint(equalTo: addImageView.topAnchor),
+            selectedImages.bottomAnchor.constraint(equalTo: addImageView.bottomAnchor)
+        ])
 
         let emotionStackView = UIStackView()
         view.addSubview(emotionStackView)
@@ -190,16 +212,101 @@ class AddScreen: UIViewController {
         }
     }
     
+    // 갤러리에서 이미지 불러오기
     @objc func addBtnAction() {
-
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        print("imagePicker 버튼 눌림")
+        
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("이미지 선택")
+        picker.dismiss(animated: true) { () in
+            let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            self.selectedImages.image = img
+            self.selectedImages.backgroundColor = .lightGray
+            
+            if let imageData = img?.pngData() {
+                self.imageList.append(imageData)
+            }
+        }
     }
 
+    // 저장 버튼 누르기
     @objc func doneButtonAction() {
         let content = textView.text
-        let newPost = NewPost(postId: 1, userId: 1, emotion: Int16(emotionSelectedNumber), text: content ?? "")
-        print(newPost.emotion, newPost.postId, newPost.text, newPost.userId)
+        saveData(1, 1, emotionSelectedNumber, content ?? "")
         self.dismiss(animated: true)
     }
+    
+    // 취소 버튼 누르기
+    @objc func cancelButtonAction() {
+        self.dismiss(animated: true)
+    }
+    
+    // 코어데이터에 데이터 저장 
+    func saveData(_ postId: Int16, _ userId: Int16, _ emotionSelectedNumber: Int, _ content: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let post = NewPost(postId: postId, userId: userId, emotion: Int16(emotionSelectedNumber), text: content)
+        let postEntity = NSEntityDescription.entity(forEntityName: "Post", in: context)
+        
+        if let postEntity = postEntity {
+            let newPost = NSManagedObject(entity: postEntity, insertInto: context)
+            newPost.setValue(post.postId, forKey: "post_id")
+            newPost.setValue(post.userId, forKey: "user_id")
+            newPost.setValue(post.text, forKey: "post_text")
+            newPost.setValue(post.emotion, forKey: "emotion_num")
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        let pictureEntity = NSEntityDescription.entity(forEntityName: "Picture", in: context)
+        for image in imageList {
+            if let pictureEntity = pictureEntity {
+                let newPicture = NSManagedObject(entity: pictureEntity, insertInto: context)
+                newPicture.setValue(image, forKey: "picture")
+                newPicture.setValue(postId, forKey: "post_id")
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    func fetchPosts() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+        
+        do {
+            let fetchedPosts = try context.fetch(fetchRequest)
+            for post in fetchedPosts {
+                let postId = post.post_id
+                let userId = post.user_id
+                let emotion = post.emotion_num
+                let content = post.post_text
+                
+                print("Post ID: \(postId), User ID: \(userId), Emotion: \(emotion), Content: \(content)")
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
 
     func setLineDot(view: UIView, color: UIColor, radius: CGFloat){
         let borderLayer = CAShapeLayer()
@@ -215,6 +322,8 @@ class AddScreen: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.textView.resignFirstResponder()
     }
+    
+
 
 }
 
