@@ -13,6 +13,7 @@ class AddScreen: UIViewController {
     let addImageView = UIView()
     let textView = UITextView()
     let textViewPlaceHolder = "Write a caption..."
+    let contect = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,10 +111,14 @@ class AddScreen: UIViewController {
     }
 
     @objc func addBtnAction() {
-        
+
     }
 
     @objc func doneButtonAction() {
+        if let content = textView.text {
+            print("내용이 content에 저장되었습니다.")
+            print(content)
+        }
         self.dismiss(animated: true)
     }
 
@@ -151,4 +156,11 @@ extension AddScreen: UITextViewDelegate {
         }
     }
     
+}
+
+struct Post_struct {
+    var postId: Int16
+    var userId: Int16
+    var emotion: Int16
+    var text: String
 }
