@@ -25,6 +25,10 @@
 		AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */; };
 		ABEED5252A91E33C00FAB598 /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5242A91E33C00FAB598 /* DetailScreen.swift */; };
 		ABEED5282A91F1E900FAB598 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5262A91F1E900FAB598 /* CoreData.xcdatamodeld */; };
+		ABEED5402A929F3700FAB598 /* PostDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEED53F2A929F3700FAB598 /* PostDataManager.swift */; };
+		ABEED5422A92AF8C00FAB598 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5412A92AF8C00FAB598 /* CoreData.swift */; };
+		ABEED5442A92B55B00FAB598 /* PictureDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5432A92B55B00FAB598 /* PictureDataManager.swift */; };
+		ABEED5462A92B7F900FAB598 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEED5452A92B7F900FAB598 /* UserDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,10 @@
 		AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageScreen.swift; sourceTree = "<group>"; };
 		ABEED5242A91E33C00FAB598 /* DetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 		ABEED5272A91F1E900FAB598 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		ABEED53F2A929F3700FAB598 /* PostDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataManager.swift; sourceTree = "<group>"; };
+		ABEED5412A92AF8C00FAB598 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		ABEED5432A92B55B00FAB598 /* PictureDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDataManager.swift; sourceTree = "<group>"; };
+		ABEED5452A92B7F900FAB598 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,10 @@
 			children = (
 				4E82181C2A8DFAAC00250CE0 /* FeedManager.swift */,
 				4E82181E2A8DFB7500250CE0 /* ShowFeed.swift */,
+				ABEED5412A92AF8C00FAB598 /* CoreData.swift */,
+				ABEED53F2A929F3700FAB598 /* PostDataManager.swift */,
+				ABEED5432A92B55B00FAB598 /* PictureDataManager.swift */,
+				ABEED5452A92B7F900FAB598 /* UserDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,9 +199,12 @@
 				AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */,
 				AB11943A2A8A0AD700E54E79 /* ViewController.swift in Sources */,
 				ABEED5282A91F1E900FAB598 /* CoreData.xcdatamodeld in Sources */,
+				ABEED5442A92B55B00FAB598 /* PictureDataManager.swift in Sources */,
+				ABEED5422A92AF8C00FAB598 /* CoreData.swift in Sources */,
 				AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */,
 				4ED316DA2A8F49410053F33D /* FeedCell.swift in Sources */,
-				4E0DD1572A92980B0052439E /* HomeScreen.swift in Sources */,
+				AB11944E2A8A391000E54E79 /* HomeScreen.swift in Sources */,
+				ABEED5402A929F3700FAB598 /* PostDataManager.swift in Sources */,
 				AB1194362A8A0AD700E54E79 /* AppDelegate.swift in Sources */,
 				4E1CE64C2A9306CB008EE464 /* ProfileEditViewController.swift in Sources */,
 				AB1194382A8A0AD700E54E79 /* SceneDelegate.swift in Sources */,
@@ -197,6 +212,7 @@
 				4E82181D2A8DFAAC00250CE0 /* FeedManager.swift in Sources */,
 				AB11944C2A8A361B00E54E79 /* Extension.swift in Sources */,
 				AB1194522A8A396F00E54E79 /* AddScreen.swift in Sources */,
+				ABEED5462A92B7F900FAB598 /* UserDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

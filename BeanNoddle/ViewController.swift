@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import CoreData
+
+// 임의로 userId 발급받게 해줬습니다. 추후 수정
+let globalUserId: UUID = UUID()
 
 class ViewController: UITabBarController, UITabBarControllerDelegate {
 
@@ -13,6 +17,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.delegate = self
+        
+        // 임의로 userId 발급받게 해줬습니다. 추후 수정
+        UserDataManager.shared.createUser(globalUserId)
         
         // tab bar 아이콘 설정 1
         let firstVC = UINavigationController(rootViewController: HomeScreen())
@@ -30,7 +37,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         let fourthVCStoryBoard = UIStoryboard(name: "MyPageStoryBoard", bundle: nil)
         
         let fourthVC = fourthVCStoryBoard.instantiateViewController(withIdentifier: "MyPageStoryBoard") as! MyPageScreen
-        
+        fourthVC.posts = fetchData()
+        PostDataManager.shared.fetchPosts()
         //선택시 이동
         navigationController?.pushViewController(fourthVC, animated: true)
         if let navigationController = viewControllers?[3] as? UINavigationController { navigationController.pushViewController(fourthVC, animated: false)
@@ -54,5 +62,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             return false // 선택한 탭을 처리한 후에는 선택을 취소
         }
         return true // 다른 탭은 기본 동작 수행
+    }
+    
+    func fetchData() -> [Post] {
+        return (UserDataManager.shared.fetchPosts(globalUserId as NSUUID))
     }
 }

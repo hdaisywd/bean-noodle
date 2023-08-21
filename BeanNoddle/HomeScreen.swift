@@ -1,5 +1,5 @@
 import UIKit
-import Foundation
+import CoreData
 
 class HomeScreen: UIViewController {
     
@@ -19,6 +19,7 @@ class HomeScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: "FeedCell")
         view.backgroundColor = .white
         
