@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 
 class HomeScreen: UIViewController {
     
@@ -109,20 +110,20 @@ extension HomeScreen {
     
     private func loadInitialData() {
         isLoadingMore = true
-            APIcaller.shared.getTrendingMovies(page: currentPage) { [weak self] result in
-                switch result {
-                case .success(let feeds):
-                    self?.searchResults = feeds
-                    DispatchQueue.main.async {
-                        self?.collectionView.reloadData()
-                        self?.isLoadingMore = false
-                    }
-                case .failure(let error):
-                    print("Initial movie loading failed: \(error)")
+        APIcaller.shared.getTrendingMovies(page: currentPage) { [weak self] result in
+            switch result {
+            case .success(let feeds):
+                self?.searchResults = feeds
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
                     self?.isLoadingMore = false
                 }
+            case .failure(let error):
+                print("Initial movie loading failed: \(error)")
+                self?.isLoadingMore = false
             }
         }
+    }
     
     private func refreshFeed() {
         APIcaller.shared.getTrendingMovies(page: currentPage) { [weak self] result in

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2642C4832A920D88003D5500 /* MyPageStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2642C4822A920D88003D5500 /* MyPageStoryBoard.storyboard */; };
+		4E0DD1572A92980B0052439E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11944D2A8A391000E54E79 /* HomeScreen.swift */; };
+		4E1CE64C2A9306CB008EE464 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1CE64B2A9306CB008EE464 /* ProfileEditViewController.swift */; };
 		4E82181D2A8DFAAC00250CE0 /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E82181C2A8DFAAC00250CE0 /* FeedManager.swift */; };
 		4E82181F2A8DFB7500250CE0 /* ShowFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E82181E2A8DFB7500250CE0 /* ShowFeed.swift */; };
 		4ED316DA2A8F49410053F33D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED316D92A8F49410053F33D /* FeedCell.swift */; };
@@ -18,7 +20,6 @@
 		AB11943F2A8A0AD900E54E79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB11943E2A8A0AD900E54E79 /* Assets.xcassets */; };
 		AB1194422A8A0AD900E54E79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */; };
 		AB11944C2A8A361B00E54E79 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11944B2A8A361B00E54E79 /* Extension.swift */; };
-		AB11944E2A8A391000E54E79 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB11944D2A8A391000E54E79 /* HomeScreen.swift */; };
 		AB1194522A8A396F00E54E79 /* AddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194512A8A396F00E54E79 /* AddScreen.swift */; };
 		AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194532A8A3BB500E54E79 /* MessageScreen.swift */; };
 		AB1194562A8A3BC400E54E79 /* MyPageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		2642C4822A920D88003D5500 /* MyPageStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyPageStoryBoard.storyboard; sourceTree = "<group>"; };
+		4E1CE64B2A9306CB008EE464 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		4E82181C2A8DFAAC00250CE0 /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
 		4E82181E2A8DFB7500250CE0 /* ShowFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFeed.swift; sourceTree = "<group>"; };
 		4ED316D92A8F49410053F33D /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				4ED316D92A8F49410053F33D /* FeedCell.swift */,
 				AB1194552A8A3BC400E54E79 /* MyPageScreen.swift */,
 				2642C4822A920D88003D5500 /* MyPageStoryBoard.storyboard */,
+				4E1CE64B2A9306CB008EE464 /* ProfileEditViewController.swift */,
 				AB11943B2A8A0AD700E54E79 /* Main.storyboard */,
 				AB11943E2A8A0AD900E54E79 /* Assets.xcassets */,
 				AB1194402A8A0AD900E54E79 /* LaunchScreen.storyboard */,
@@ -186,8 +189,9 @@
 				ABEED5282A91F1E900FAB598 /* CoreData.xcdatamodeld in Sources */,
 				AB1194542A8A3BB500E54E79 /* MessageScreen.swift in Sources */,
 				4ED316DA2A8F49410053F33D /* FeedCell.swift in Sources */,
-				AB11944E2A8A391000E54E79 /* HomeScreen.swift in Sources */,
+				4E0DD1572A92980B0052439E /* HomeScreen.swift in Sources */,
 				AB1194362A8A0AD700E54E79 /* AppDelegate.swift in Sources */,
+				4E1CE64C2A9306CB008EE464 /* ProfileEditViewController.swift in Sources */,
 				AB1194382A8A0AD700E54E79 /* SceneDelegate.swift in Sources */,
 				ABEED5252A91E33C00FAB598 /* DetailScreen.swift in Sources */,
 				4E82181D2A8DFAAC00250CE0 /* FeedManager.swift in Sources */,

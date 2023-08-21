@@ -18,7 +18,12 @@ class MyPageScreen: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var FollowingCount: UILabel!
     
     @IBAction func profileEditButton(_ sender: UIButton) {
-    }
+//        let modalViewController = UIStoryboard(name: "ProfileVC", bundle: nil).instantiateViewController(withIdentifier: "ProfileEditViewController") as! ProfileEditViewController
+//           
+//           modalViewController.modalPresentationStyle = .overFullScreen // 모달 스타일 설정
+//           present(modalViewController, animated: true, completion: nil)
+       }
+    
     
     @IBAction func profileShare(_ sender: UIButton) {
     }
