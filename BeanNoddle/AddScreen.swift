@@ -226,7 +226,7 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
     // 저장 버튼 누르기
     @objc func doneButtonAction() {
         let content = textView.text
-        let userId = UUID() as NSUUID
+        let userId = globalUserId as NSUUID
         let postId = UUID() as NSUUID
         saveData(userId, postId, emotionSelectedNumber, content ?? "", imageList)
         self.dismiss(animated: true)
@@ -238,39 +238,17 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
     }
     
     func saveData(_ postId: NSUUID, _ userId: NSUUID, _ emotionSelectedNumber: Int, _ content: String, _ imageList: [Data]) {
-        CoreDataManager.shared.saveData(
+        PostDataManager.shared.savePostData(
             postId: postId,
             userId: userId,
             emotionSelectedNumber: emotionSelectedNumber,
             content: content,
             imageList: imageList
         )
-        
-        fetchPosts()
+
+        print(postId, userId, emotionSelectedNumber, content, imageList)
         print("저장 완료됐습니다")
     }
-    
-    func fetchPosts() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-        
-        do {
-            let fetchedPosts = try context.fetch(fetchRequest)
-            for post in fetchedPosts {
-                let postId = post.post_id
-                let userId = post.user_id
-                let emotion = post.emotion_num
-                let content = post.post_text
-                
-                print("Post ID: \(postId), User ID: \(userId), Emotion: \(emotion), Content: \(content)")
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-
 
     func setLineDot(view: UIView, color: UIColor, radius: CGFloat){
         let borderLayer = CAShapeLayer()
