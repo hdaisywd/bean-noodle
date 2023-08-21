@@ -237,7 +237,7 @@ class AddScreen: UIViewController, UINavigationControllerDelegate, UIImagePicker
         self.dismiss(animated: true)
     }
     
-    func saveData(_ postId: NSUUID, _ userId: NSUUID, _ emotionSelectedNumber: Int, _ content: String, _ imageList: [Data]) {
+    func saveData(_ userId: NSUUID, _ postId: NSUUID, _ emotionSelectedNumber: Int, _ content: String, _ imageList: [Data]) {
         PostDataManager.shared.savePostData(
             postId: postId,
             userId: userId,

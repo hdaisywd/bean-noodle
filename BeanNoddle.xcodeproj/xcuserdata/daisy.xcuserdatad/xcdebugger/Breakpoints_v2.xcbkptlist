@@ -65,6 +65,21 @@
                   endingLineNumber = "74"
                   offsetFromSymbolStart = "1980">
                </Location>
+               <Location
+                  uuid = "EB616148-C123-4B50-8315-C151C8BF174E - abc75f8253ed8c7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BeanNoddle.PostDataManager.fetchPosts() -&gt; Swift.Array&lt;BeanNoddle.Post&gt;"
+                  moduleName = "BeanNoddle"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/daisy/Desktop/bean-noodle/BeanNoddle/Model/PostDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "1980">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
