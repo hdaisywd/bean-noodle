@@ -8,10 +8,7 @@
 import Foundation
 import UIKit
 
-
 class MyPageScreen: UIViewController {
-    
-    let posts = UserDataManager.shared.fetchPosts(globalUserId as NSUUID)
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
@@ -29,9 +26,12 @@ class MyPageScreen: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
 
-
+    var posts = [Post]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchPosts()
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let spacing: CGFloat = 1
@@ -48,13 +48,22 @@ class MyPageScreen: UIViewController {
         profileImage.clipsToBounds = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
+    
+    func fetchPosts() {
+        posts = UserDataManager.shared.fetchPosts(globalUserId as NSUUID)
+    }
+    
 }
 
 extension MyPageScreen: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(posts.count)
-        return posts.count
+        return posts.count 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

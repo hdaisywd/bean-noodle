@@ -55,6 +55,7 @@ class PostDataManager {
     }
     
     func fetchPosts() -> [Post] {
+        print("fetchPosts")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         

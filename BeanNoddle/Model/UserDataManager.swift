@@ -44,25 +44,25 @@ class UserDataManager {
 
     
     func fetchPosts(_ userId: NSUUID) -> [Post] {
+        print("fetchPosts 실행")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
         
-        var retPosts = [Post]()
+        var returnPosts = [Post]()
         do {
             let fetchedPost = try context.fetch(fetchRequest)
             for eachPost in fetchedPost {
-                print(eachPost.user_id)
                 if eachPost.user_id == userId as UUID {
-                    retPosts.append(eachPost)
+                    returnPosts.append(eachPost)
                 }
             }
         } catch {
             print(error.localizedDescription)
         }
         
-        return retPosts
+        return returnPosts
 
     }
 }
